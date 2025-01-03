@@ -9,7 +9,7 @@ export default function Home() {
             <Button variant="ghost" size="sm">ghost</Button>
             <Button variant="muted" size="sm">muted</Button>
             <Button variant="teritary" size="sm">teritary</Button>
-            <p className="text-red-500">maxflycool</p>
+            <p className="text-red-500">maxflycool123</p>
         </>
     );
 }
