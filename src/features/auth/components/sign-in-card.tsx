@@ -9,23 +9,22 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import Link from "next/link";
+import {loginSchema} from "@/features/auth/schemas.";
+import {useLogin} from "@/features/auth/api/user-login";
 
-
-const formSchema = z.object({
-    email: z.string().email(),
-    password: z.string().min(1, "Required")
-})
-
-const onSubmit = (values: z.infer<typeof formSchema>)=> {
-    console.log({values});
-}
 
 const signInCard = () => {
+    const {mutate} = useLogin();
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {email: "", password: ""},
     })
+
+    const onSubmit = (values: z.infer<typeof loginSchema>) => {
+        mutate({json: values});
+    }
 
     return (
         <Card className="w-full h-full md:w-[487px] border-none shadow-none">

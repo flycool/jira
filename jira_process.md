@@ -43,6 +43,15 @@ import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/
 
 
 
-# hono
+# set up hono api
 https://hono.dev/
+offer type infer, type safe
 
+bun add hono
+
+
+# creating auth api
+
+bun add @tanstack/react-query@5.59.0
+
+bun add @hono/zod-validator

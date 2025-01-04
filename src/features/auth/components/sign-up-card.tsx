@@ -9,24 +9,23 @@ import {z} from "zod";
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
+import {registerSchema} from "@/features/auth/schemas.";
+import {useRegister} from "@/features/auth/api/user-register";
 
-const formSchema = z.object({
-    name: z.string().trim().min(1, "Required"),
-    email: z.string().email(),
-    password: z.string().min(8, "Minimum 8 characters!"),
-})
-
-const onSubmit = (values: z.infer<typeof formSchema>)=> {
-    console.log({values});
-}
 
 const signUpCard = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const {mutate} = useRegister()
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const form = useForm<z.infer<typeof registerSchema>>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {name: "", email: "", password: ""},
     })
 
+    const onSubmit = (values: z.infer<typeof registerSchema>) => {
+        mutate({json: values});
+    }
 
     return (
         <Card className="w-full h-full md:w-[487px] border-none shadow-none">
