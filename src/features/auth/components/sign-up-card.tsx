@@ -10,7 +10,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
 import {registerSchema} from "@/features/auth/schemas.";
-import {useRegister} from "@/features/auth/api/user-register";
+import {useRegister} from "@/features/auth/api/use-register";
 
 
 const signUpCard = () => {
