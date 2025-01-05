@@ -1,3 +1,5 @@
+"use client"
+
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {DottedSeparator} from "@/components/dotted-separator";
 import {Input} from "@/components/ui/input";
@@ -14,7 +16,8 @@ import {useLogin} from "@/features/auth/api/use-login";
 
 
 const signInCard = () => {
-    const {mutate} = useLogin();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const {mutate, isPending} = useLogin();
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const form = useForm<z.infer<typeof loginSchema>>({
@@ -76,7 +79,9 @@ const signInCard = () => {
                         />
 
 
-                        <Button className="w-full" size="lg" disabled={false}>Login</Button>
+                        <Button className="w-full" size="lg" disabled={isPending}>
+                            Login
+                        </Button>
                     </form>
                 </Form>
             </CardContent>
@@ -84,11 +89,11 @@ const signInCard = () => {
                 <DottedSeparator/>
             </div>
             <CardContent className="p-7 flex flex-col gap-y-4">
-                <Button className="w-full" disabled={false} variant="secondary" size="lg">
+                <Button className="w-full" disabled={isPending} variant="secondary" size="lg">
                     <FcGoogle className="mr-2 size-5"/>
                     Login with Google
                 </Button>
-                <Button className="w-full" disabled={false} variant="secondary" size="lg">
+                <Button className="w-full" disabled={isPending} variant="secondary" size="lg">
                     <FaGithub className="mr-2 size-5"/>
                     Login with Github
                 </Button>

@@ -1,3 +1,5 @@
+"use client"
+
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {DottedSeparator} from "@/components/dotted-separator";
 import {Input} from "@/components/ui/input";
@@ -15,7 +17,7 @@ import {useRegister} from "@/features/auth/api/use-register";
 
 const signUpCard = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const {mutate} = useRegister()
+    const {mutate, isPending} = useRegister()
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const form = useForm<z.infer<typeof registerSchema>>({
@@ -103,7 +105,9 @@ const signUpCard = () => {
                             }
                         />
 
-                        <Button className="w-full" size="lg" disabled={false}>Login</Button>
+                        <Button className="w-full" size="lg" disabled={isPending}>
+                            Register
+                        </Button>
                     </form>
                 </Form>
             </CardContent>
@@ -111,11 +115,11 @@ const signUpCard = () => {
                 <DottedSeparator/>
             </div>
             <CardContent className="p-7 flex flex-col gap-y-4">
-                <Button className="w-full" disabled={false} variant="secondary" size="lg">
+                <Button className="w-full" disabled={isPending} variant="secondary" size="lg">
                     <FcGoogle className="mr-2 size-5"/>
                     Login with Google
                 </Button>
-                <Button className="w-full" disabled={false} variant="secondary" size="lg">
+                <Button className="w-full" disabled={isPending} variant="secondary" size="lg">
                     <FaGithub className="mr-2 size-5"/>
                     Login with Github
                 </Button>
