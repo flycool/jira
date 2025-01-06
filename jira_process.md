@@ -68,6 +68,10 @@ https://cloud.appwrite.io/v1
 standard_77a29cb6f1228b1d7e8868c868a3b60b6f109d342d43f52f4dc9d618942146358acbc88ad95e39d5702f15bc62d7449b7ae9a28e4f8f6dd4dcd3af798ee1c63ad7a4714b47349e25cfb7facba8cfde0565c990e0b3386cbeb06c629385114c3b592026d1f3ce57487871333745e77b918d1a173f91f09afeb625a4799c09a2d3
 
 # build a session middleware
-
 # protect routes
+
+Please stop using middleware to protect your routes:
+https://pilcrowonpaper.com/blog/middleware-auth/
+
+# building a dashboard layout
 
