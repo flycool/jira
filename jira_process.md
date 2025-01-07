@@ -80,3 +80,12 @@ https://pilcrowonpaper.com/blog/middleware-auth/
 # handing image upload
 
 # creating workspace members
+
+# building a responsive modal
+
+bun add react-use
+
+bun add nuqs@1.19.1
+nuqs: can share state with url
+
+
