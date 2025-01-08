@@ -91,3 +91,5 @@ nuqs: can share state with url
 # building a standalone layout
 
 # buiding workspace setting
+
+# refactoring server queries
