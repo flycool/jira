@@ -140,31 +140,54 @@ const app = new Hono()
       return c.json({ data: workspace });
     }
   )
-  .delete(
-    "/:workspaceId",
-    sessionMiddleware,
-    async (c) => {
-      const databases = c.get("databases")
-      const user = c.get("user")
+  .delete("/:workspaceId", sessionMiddleware, async (c) => {
+    const databases = c.get("databases");
+    const user = c.get("user");
 
-      const {workspaceId} = c.req.param()
+    const { workspaceId } = c.req.param();
 
-      const member = await getMember({
-        databases,
-        workspaceId,
-        userId: user.$id
-      })
+    const member = await getMember({
+      databases,
+      workspaceId,
+      userId: user.$id,
+    });
 
-      // TODO: delete members, projects, and tasks
+    // TODO: delete members, projects, and tasks
 
-      if(!member || member.role !== MemberRole.ADMIN) {
-        return c.json({error:"Unauthorized"},401)
-      }
-
-      await databases.deleteDocument(DATABASE_ID, WORKSPACES_ID, workspaceId)
-
-      return c.json({data: {$id: workspaceId}})
+    if (!member || member.role !== MemberRole.ADMIN) {
+      return c.json({ error: "Unauthorized" }, 401);
     }
-  );
+
+    await databases.deleteDocument(DATABASE_ID, WORKSPACES_ID, workspaceId);
+
+    return c.json({ data: { $id: workspaceId } });
+  })
+  .post("/:workspaceId/reset-invite-code", sessionMiddleware, async (c) => {
+    const databases = c.get("databases");
+    const user = c.get("user");
+
+    const { workspaceId } = c.req.param();
+
+    const member = await getMember({
+      databases,
+      workspaceId,
+      userId: user.$id,
+    });
+
+    if (!member || member.role !== MemberRole.ADMIN) {
+      return c.json({ error: "Unauthorized" }, 401);
+    }
+
+    const workspace = await databases.updateDocument(
+      DATABASE_ID,
+      WORKSPACES_ID,
+      workspaceId,
+      {
+        inviteCode: getnerateInviteCode(6),
+      }
+    );
+
+    return c.json({ data: workspace });
+  });
 
 export default app;

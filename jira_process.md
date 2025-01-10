@@ -93,3 +93,7 @@ nuqs: can share state with url
 # buiding workspace setting
 
 # refactoring server queries
+
+# add delete workspace functionality
+
+# add reset invite code functionality
