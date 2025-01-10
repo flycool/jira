@@ -99,3 +99,6 @@ nuqs: can share state with url
 # add reset invite code functionality
 
 # buiding the invite system
+
+# buiding the members list
+
