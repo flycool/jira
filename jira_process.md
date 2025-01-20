@@ -102,3 +102,4 @@ nuqs: can share state with url
 
 # buiding the members list
 
+# adding workspace projects
