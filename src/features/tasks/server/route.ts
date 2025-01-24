@@ -44,7 +44,7 @@ const app = new Hono()
       });
 
       if (!member) {
-        return c.json({ error: "Unauthorized" });
+        return c.json({ error: "Unauthorized" }, 401);
       }
 
       const query = [
