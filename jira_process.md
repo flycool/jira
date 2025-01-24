@@ -111,3 +111,7 @@ nuqs: can share state with url
 # buiding a task form
 
 # building a data filters
+
+# building a data table
+
+bun add @tanstack/react-table@8.20.5
