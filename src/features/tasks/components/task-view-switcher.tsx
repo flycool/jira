@@ -12,6 +12,10 @@ import { DataFilters } from "./data-filters";
 import { useTaskFilters } from "../hooks/use-task-filters";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
+import { Datakanban } from "./data-kanban";
+import { useCallback } from "react";
+import { TaskStatus } from "../types";
+import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks";
 
 const TaskViewSwitcher = () => {
   const [{ status, assigneeId, projectId, dueDate }] = useTaskFilters();
@@ -23,6 +27,8 @@ const TaskViewSwitcher = () => {
   const workspaceId = useWorkspaceId();
   const { open } = useCreateTaskModal();
 
+  const { mutate: bulkUpdate } = useBulkUpdateTasks();
+
   const { data: tasks, isLoading: isLoadingTasks } = useGetTasks({
     workspaceId,
     projectId,
@@ -30,6 +36,21 @@ const TaskViewSwitcher = () => {
     status,
     dueDate,
   });
+
+  const onKanbanChange = useCallback(
+    (
+      tasks: {
+        $id: string;
+        status: TaskStatus;
+        position: number;
+      }[]
+    ) => {
+      bulkUpdate({
+        json: { tasks },
+      });
+    },
+    [bulkUpdate]
+  );
 
   return (
     <Tabs
@@ -68,7 +89,10 @@ const TaskViewSwitcher = () => {
               <DataTable columns={columns} data={tasks?.documents ?? []} />
             </TabsContent>
             <TabsContent value="kanban" className="mt-0">
-              {JSON.stringify(tasks)}
+              <Datakanban
+                data={tasks?.documents ?? []}
+                onChange={onKanbanChange}
+              />
             </TabsContent>
             <TabsContent value="calendar" className="mt-0">
               {JSON.stringify(tasks)}

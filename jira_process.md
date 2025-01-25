@@ -118,3 +118,9 @@ bun add @tanstack/react-table@8.20.5
 
 # adding task settings
 
+# building a data kanban
+
+bun add @hello-pangea/dnd
+
+# adding the kanban update api
+
