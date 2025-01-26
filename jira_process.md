@@ -128,3 +128,6 @@ bun add @hello-pangea/dnd
 
 bun add react-big-calendar@1.14.1
 bun add -D @types/react-big-calendar@1.8.11
+
+# adding a task page
+
