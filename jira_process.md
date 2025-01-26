@@ -131,3 +131,5 @@ bun add -D @types/react-big-calendar@1.8.11
 
 # adding a task page
 
+# refactoring server components
+
