@@ -133,3 +133,4 @@ bun add -D @types/react-big-calendar@1.8.11
 
 # refactoring server components
 
+# building project analytics
