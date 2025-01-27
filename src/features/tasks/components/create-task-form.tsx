@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useRouter } from "next/navigation";
 import { createTaskSchema } from "../schemas";
 import { useCreateTask } from "../api/use-create-task";
 import { DatePicker } from "@/components/date-picker";
@@ -44,7 +43,6 @@ export const CreateTaskForm = ({
   memberOptions,
 }: CreateTaskFormProps) => {
   const workspaceId = useWorkspaceId();
-  const router = useRouter();
   const { mutate, isPending } = useCreateTask();
 
   const form = useForm<z.infer<typeof createTaskSchema>>({
@@ -58,7 +56,7 @@ export const CreateTaskForm = ({
     mutate(
       { json: { ...values, workspaceId } },
       {
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
           form.reset();
           // TODO: redirect to new task
           // router.push(`/workspaces/${workspaceId}/projects/${data.$id}`);

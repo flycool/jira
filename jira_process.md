@@ -136,3 +136,5 @@ bun add -D @types/react-big-calendar@1.8.11
 # building project analytics
 
 # building workspace analytics
+
+# resolving build errors

@@ -16,8 +16,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
-import { useRouter } from "next/navigation";
 import { createTaskSchema } from "../schemas";
 import { DatePicker } from "@/components/date-picker";
 import {
@@ -45,8 +43,6 @@ export const EditTaskForm = ({
   memberOptions,
   initialValues,
 }: EditTaskFormProps) => {
-  const workspaceId = useWorkspaceId();
-  const router = useRouter();
   const { mutate, isPending } = useUpdateTask();
 
   const form = useForm<z.infer<typeof createTaskSchema>>({
@@ -65,7 +61,7 @@ export const EditTaskForm = ({
     mutate(
       { json: values, param: { taskId: initialValues.$id } },
       {
-        onSuccess: ({ data }) => {
+        onSuccess: () => {
           form.reset();
           // TODO: redirect to new task
           // router.push(`/workspaces/${workspaceId}/projects/${data.$id}`);
