@@ -140,3 +140,13 @@ bun add -D @types/react-big-calendar@1.8.11
 # resolving build errors
 
 # implementing github oauth login
+
+# deployment
+
+use vercel 
+remeber edit:
+NEXT_PUBLIC_APP_URL=(the deployed url)
+edit the github homepage url (the deployed url)
+
+Console appwrite -> integrations:
+add web app
